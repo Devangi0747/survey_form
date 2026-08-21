@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Jobflow
 
-## Getting Started
+Jobflow is an approval-first workspace for a calmer daily job search. It is designed to find relevant roles, surface the strongest matches, and help prepare an application without submitting anything on your behalf.
 
-First, run the development server:
+## Current MVP
+
+- Daily review dashboard with realistic mock matches
+- Match scoring and job detail panel
+- Shortlist state for saved roles
+- Private application notes
+- Manual review gate before any future submission flow
+- Responsive layout for desktop and smaller screens
+
+## Run locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000` in a browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Validate
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint
+npm run build
+```
 
-## Learn More
+## Next integrations
 
-To learn more about Next.js, take a look at the following resources:
+The mock job list should be replaced with permitted sources such as official APIs or feeds. A production version should add encrypted profile storage, a daily scheduler, tailored draft generation, application tracking, and a confirmation step immediately before any permitted submission. Credentials and provider-specific secrets should stay in environment variables and should never be committed.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## GitHub
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The project has a local Git repository initialized by the scaffold. To publish it, create an empty GitHub repository, then run the standard `git remote add origin ...`, `git add .`, `git commit`, and `git push` commands from this folder after authenticating with GitHub.
