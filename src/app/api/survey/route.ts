@@ -43,8 +43,12 @@ export async function POST(request: Request) {
   await writeFile(responseFile, JSON.stringify([...responses, stored], null, 2), "utf8");
   const sheetsWebhook = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
   if (sheetsWebhook) {
-    const sheetsResponse = await fetch(sheetsWebhook, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ columns: exportColumns, row: responseRow(stored) }) });
-    if (!sheetsResponse.ok) return NextResponse.json({ error: "Your response could not be added to the research spreadsheet." }, { status: 502 });
+    try {
+      const sheetsResponse = await fetch(sheetsWebhook, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ columns: exportColumns, row: responseRow(stored) }) });
+      if (!sheetsResponse.ok) return NextResponse.json({ error: "Your response could not be added to the research spreadsheet." }, { status: 502 });
+    } catch {
+      return NextResponse.json({ error: "The research spreadsheet is temporarily unavailable. Please try again." }, { status: 502 });
+    }
   }
   return NextResponse.json({ participantId: stored.participantId }, { status: 201 });
 }

@@ -50,7 +50,7 @@ export default function Home() {
     setSaving(true); setNotice("");
     try {
       const response = await fetch("/api/survey", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ submissionKey: getSubmissionKey(), consent, ...participantDetails, answers }) });
-      const result = await response.json();
+      const result = await response.json().catch(() => ({ error: "The survey service returned an invalid response. Please try again." }));
       if (!response.ok) throw new Error(result.error ?? "Your response could not be recorded.");
       window.localStorage.setItem("survey-completed", "true"); setSubmitted(true);
     } catch (error) { setNotice(error instanceof Error ? error.message : "Your response could not be recorded."); } finally { setSaving(false); }
