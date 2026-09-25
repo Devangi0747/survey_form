@@ -15,6 +15,10 @@ npm run dev
 
 Responses are written to `data/survey-responses.json` (the directory is created on first submission). The researcher dashboard uses `x-researcher-token` internally and provides the requested CSV export at `/researcher`. Do not collect real participant data until the university ethics approval and approved storage configuration are in place; for production, replace the local JSON writer with encrypted, access-controlled storage.
 
+### Google Sheets response storage
+
+For durable response storage on Vercel, create a Google Sheet with a sheet tab named `Survey Responses`, open **Extensions > Apps Script**, paste `scripts/google-sheets-webhook.gs`, deploy it as a web app accessible to anyone, and copy the deployment URL. Add that URL to Vercel as the Production environment variable `GOOGLE_SHEETS_WEBHOOK_URL`, then redeploy. Each completed survey will append one row with the requested export columns. Keep the spreadsheet access restricted to the approved research team.
+
 ## Current MVP
 
 - Daily review dashboard with realistic mock matches
