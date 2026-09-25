@@ -2,6 +2,8 @@
 
 # dependencies
 /node_modules
+/extension/node_modules/
+/extension/dist/
 /.pnp
 .pnp.*
 .yarn/*
@@ -25,6 +27,7 @@
 /data/survey-responses.json
 /backend/data/
 /backend/*.db
+/backend/**/__pycache__/
 
 # misc
 .DS_Store
