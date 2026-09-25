@@ -20,6 +20,12 @@
 # production
 /build
 
+# private local resume uploads
+/data/resumes/
+/data/survey-responses.json
+/backend/data/
+/backend/*.db
+
 # misc
 .DS_Store
 *.pem
@@ -39,3 +45,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+.vercel
