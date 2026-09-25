@@ -39,8 +39,12 @@ export async function POST(request: Request) {
     timestamp: new Date().toISOString(),
     scores: { aiDependency: mean(answers, ["Q6", "Q7", "Q8", "Q9", "Q10", "Q11"]), independentCapability: mean(answers, ["Q12", "Q13"]), verification: mean(answers, ["Q14", "Q15", "Q16", "Q17"]), aiLiteracy: mean(answers, ["Q18", "Q19"]), independentConfidence: Number(answers.Q20) },
   };
-  await mkdir(path.dirname(responseFile), { recursive: true });
-  await writeFile(responseFile, JSON.stringify([...responses, stored], null, 2), "utf8");
+  try {
+    await mkdir(path.dirname(responseFile), { recursive: true });
+    await writeFile(responseFile, JSON.stringify([...responses, stored], null, 2), "utf8");
+  } catch {
+    // Vercel's filesystem is read-only; durable production storage is the Sheet webhook below.
+  }
   const sheetsWebhook = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
   if (sheetsWebhook) {
     try {
